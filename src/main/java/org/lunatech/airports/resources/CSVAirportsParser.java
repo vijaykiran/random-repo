@@ -21,13 +21,15 @@ public class CSVAirportsParser {
         List<Airport> airports = new ArrayList<Airport>();
 
         try(BufferedReader br = new BufferedReader(new FileReader(resourse))){
+            //read the first line (headers)
+            line = br.readLine();
             while ((line = br.readLine()) != null) {
                 // use comma as separator
-                String[] row = line.split(CVS_SPLIT_BY);
+                String[] row = line.split(CVS_SPLIT_BY, -1);
                 Airport airport = new Airport();
-                airport.setName(row[3]);
-                airport.setIdent(row[1]);
-                airport.setIso_country(row[8]);
+                airport.setName(row[3].replace("\"", ""));
+                airport.setIdent(row[1].replace("\"", ""));
+                airport.setIso_country(row[8].replace("\"", ""));
                 airports.add(airport);
             }
         } catch (IOException e) {

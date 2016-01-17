@@ -19,13 +19,15 @@ public class CSVRunwayParser {
         List<Runway> runways = new ArrayList<Runway>();
 
         try(BufferedReader br = new BufferedReader(new FileReader(resourse))){
+            //read the first line (headers)
+            line = br.readLine();
             while ((line = br.readLine()) != null) {
                 // use comma as separator
-                String[] row = line.split(CVS_SPLIT_BY);
+                String[] row = line.split(CVS_SPLIT_BY, -1);
                 Runway runway = new Runway();
-                runway.setType(row[5]);
-                runway.setLatitude(row[8]);
-                runway.setAirport_ident(row[3]);
+                runway.setType(row[5].replace("\"", ""));
+                runway.setLatitude(row[8].replace("\"", ""));
+                runway.setAirport_ident(row[2].replace("\"", ""));
                 runways.add(runway);
             }
         } catch (IOException e) {

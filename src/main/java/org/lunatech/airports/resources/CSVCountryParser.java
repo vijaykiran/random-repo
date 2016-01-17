@@ -21,12 +21,14 @@ public class CSVCountryParser {
         List<Country> countries = new ArrayList<Country>();
 
         try(BufferedReader br = new BufferedReader(new FileReader(resourse))){
+            //read the first line (headers)
+            line = br.readLine();
             while ((line = br.readLine()) != null) {
                 // use comma as separator
-                String[] row = line.split(CVS_SPLIT_BY);
+                String[] row = line.split(CVS_SPLIT_BY, -1);
                 Country country = new Country();
-                country.setName(row[2]);
-                country.setCode(row[1]);
+                country.setName(row[2].replace("\"", ""));
+                country.setCode(row[1].replace("\"", ""));
                 countries.add(country);
             }
         } catch (IOException e) {

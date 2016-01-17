@@ -23,6 +23,8 @@ public class CSVRunwayParserTest {
     public void testParse() throws Exception {
         List<Runway> runways = csvRunwayParser.parse();
         assertNotNull(runways);
-        assertEquals(Runway.class, runways.get(1).getClass());
+        assertEquals("ASPH-G", runways.get(0).getType());
+        assertEquals("N", runways.get(1).getLatitude());
+        assertEquals("00AL", runways.get(2).getAirport_ident());
     }
 }
