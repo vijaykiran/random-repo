@@ -16,11 +16,11 @@ public class Context {
     private CSVAirportsParser airportsParser = new CSVAirportsParser();
     private CSVCountryParser countryParser = new CSVCountryParser();
     private List<Country> context;
+    private List<Runway> runways = runwayParser.parse();
+    private List<Airport> airports = airportsParser.parse();
+    private List<Country> countries = countryParser.parse();
 
     public Context() {
-        List<Runway> runways = runwayParser.parse();
-        List<Airport> airports = airportsParser.parse();
-        List<Country> countries = countryParser.parse();
         Map<String, List<Runway>> runwaysByAirports = runways.stream().
                 collect(Collectors.groupingBy(Runway::getAirport_ident));
         airports.stream()
@@ -37,5 +37,9 @@ public class Context {
 
     public List<Country> getCountries(){
         return context;
+    }
+
+    public List<Runway> getRunways() {
+        return runways;
     }
 }

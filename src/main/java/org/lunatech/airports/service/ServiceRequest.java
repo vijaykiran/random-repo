@@ -1,6 +1,7 @@
 package org.lunatech.airports.service;
 
 import org.lunatech.airports.model.Country;
+import org.lunatech.airports.model.Runway;
 import org.lunatech.airports.resources.Context;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class ServiceRequest {
     public Country getQuery(String countryCodeOrName){
         List<Country> countries = context.getCountries();
         List<Country> result = countries.stream()
-                .filter(country -> country.getName().equals(countryCodeOrName) ||
+                .filter(country -> country.getName().toLowerCase().startsWith(countryCodeOrName.toLowerCase()) ||
                         country.getCode().equals(countryCodeOrName))
                 .collect(Collectors.toList());
         if (result.size() != 1) {
@@ -34,5 +35,9 @@ public class ServiceRequest {
                         country1.getAirports().size()))
                 .collect(Collectors.toList());
         return sortedCountries;
+    }
+
+    public List<Runway> getRunways(){
+        return context.getRunways();
     }
 }

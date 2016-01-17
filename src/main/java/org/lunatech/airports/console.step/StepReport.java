@@ -1,11 +1,11 @@
 package org.lunatech.airports.console.step;
 
+import org.apache.commons.lang3.StringUtils;
 import org.lunatech.airports.model.Airport;
 import org.lunatech.airports.model.Country;
 import org.lunatech.airports.model.Runway;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by Anastasia on 17.01.2016.
@@ -19,6 +19,7 @@ public class StepReport extends AbstractStep {
         printTop10(countries);
         printBottom10(countries);
         printRunwaysPerCountry(countries);
+        printTop10Latitude();
     }
 
     private void printRunwaysPerCountry(List<Country> countries) {
@@ -42,17 +43,37 @@ public class StepReport extends AbstractStep {
         }
     }
 
-    private void printBottom10(List<Country> countries) {
-        System.out.println("10 countries with the lowest number of airports.");
-        for (int i = countries.size() - 1; i > countries.size() - 11; i--) {
-            System.out.println(countries.get(i).getName() + " " + countries.get(i).getAirports().size());
+    private void printTop10Latitude() {
+        System.out.println("Top 10 most common runway latitude");
+        List<Runway> runways = serviceRequest.getRunways();
+        Map<String, Integer> latitudes = new HashMap<>();
+        for (Runway runway : runways) {
+            String latitude = runway.getLatitude();
+            if (StringUtils.isNotEmpty(latitude)) {
+                if (latitudes.containsKey(latitude)) {
+                    latitudes.put(latitude, latitudes.get(latitude) + 1);
+                } else {
+                    latitudes.put(latitude, 1);
+                }
+            }
         }
+        latitudes.entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .limit(10)
+                .forEachOrdered(System.out::println);
+    }
+
+    private void printBottom10(List<Country> countries) {
+        countries.stream()
+                .skip(countries.size()-10)
+                .forEach(country -> System.out.println(country.getName() + " "
+                        + country.getAirports().size()));
     }
 
     private void printTop10(List<Country> countries) {
-        System.out.println("10 countries with highest number of airports.");
-        for (int i = 0; i < 10; i++) {
-            System.out.println(countries.get(i).getName() + " " + countries.get(i).getAirports().size());
-        }
+        countries.stream()
+                .limit(10)
+                .forEach(country -> System.out.println(country.getName() + " "
+                        + country.getAirports().size()));
     }
 }
