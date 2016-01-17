@@ -7,6 +7,7 @@ import org.lunatech.airports.model.Runway;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -22,10 +23,10 @@ public class Context {
         List<Runway> runways = runwayParser.parse();
         List<Airport> airports = airportsParser.parse();
         List<Country> countries = countryParser.parse();
+        Map<String, List<Runway>> runwaysByAirports = runways.stream().
+                collect(Collectors.groupingBy(Runway::getAirport_ident));
         airports.stream()
-                .forEach(airport -> airport.setRunways(runways.stream()
-                        .filter(runway -> runway.getAirport_ident().equals(airport.getIdent()))
-                        .collect(Collectors.toList())));
+                .forEach(airport -> airport.setRunways(runwaysByAirports.get(airport.getIdent())));
         countries.stream()
                 .forEach(country -> country.setAirports(airports.stream()
                         .filter(airport -> airport.getIso_country().equals(country.getCode()))
