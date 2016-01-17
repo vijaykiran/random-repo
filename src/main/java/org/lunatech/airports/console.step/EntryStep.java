@@ -21,9 +21,6 @@ public class EntryStep extends AbstractStep {
                 break;
             case 0:
                 break;
-            default:
-                unknownCommand();
-                break;
         }
     }
 }

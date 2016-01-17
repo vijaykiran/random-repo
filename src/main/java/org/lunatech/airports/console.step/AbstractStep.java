@@ -22,10 +22,6 @@ public abstract class AbstractStep {
         }
     }
 
-    protected void unknownCommand() {
-        System.out.println("Unknown Command. Try again");
-    }
-
     protected String readConsoleValue() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
