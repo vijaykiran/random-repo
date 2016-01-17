@@ -4,8 +4,6 @@ import org.lunatech.airports.model.Airport;
 import org.lunatech.airports.model.Country;
 import org.lunatech.airports.model.Runway;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,9 +26,12 @@ public class Context {
         airports.stream()
                 .forEach(airport -> airport.setRunways(runwaysByAirports.get(airport.getIdent())));
         countries.stream()
-                .forEach(country -> country.setAirports(airports.stream()
-                        .filter(airport -> airport.getIso_country().equals(country.getCode()))
-                        .collect(Collectors.toList())));
+                .forEach(country -> country.setAirports(
+                        airports.stream()
+                            .filter(airport -> airport.getIso_country().equals(country.getCode()))
+                            .collect(Collectors.toList())
+                    )
+                );
         context = countries;
     }
 
