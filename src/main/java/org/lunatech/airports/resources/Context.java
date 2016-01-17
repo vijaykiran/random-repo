@@ -19,7 +19,7 @@ public class Context {
     private List<Country> context;
 
     public Context() {
-        final List<Runway> runways = runwayParser.parse();
+        List<Runway> runways = runwayParser.parse();
         List<Airport> airports = airportsParser.parse();
         List<Country> countries = countryParser.parse();
         airports.stream()
@@ -33,7 +33,7 @@ public class Context {
         context = countries;
     }
 
-    public List<Country> getContext(){
+    public List<Country> getCountries(){
         return context;
     }
 }
