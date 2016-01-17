@@ -4,9 +4,7 @@ import org.lunatech.airports.model.Country;
 import org.lunatech.airports.model.Runway;
 import org.lunatech.airports.resources.Context;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -22,7 +20,7 @@ public class ServiceRequest {
                         country.getCode().equals(countryCodeOrName))
                 .collect(Collectors.toList());
         if (result.size() != 1) {
-            throw new IllegalStateException();
+            return null;
         }
         Country resultCountry = result.get(0);
         return resultCountry;

@@ -65,7 +65,7 @@ public class StepReport extends AbstractStep {
 
     private void printBottom10(List<Country> countries) {
         countries.stream()
-                .skip(countries.size()-10)
+                .skip(countries.size() - 10)
                 .forEach(country -> System.out.println(country.getName() + " "
                         + country.getAirports().size()));
     }

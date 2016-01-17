@@ -28,14 +28,14 @@ public class Context {
         countries.stream()
                 .forEach(country -> country.setAirports(
                         airports.stream()
-                            .filter(airport -> airport.getIso_country().equals(country.getCode()))
-                            .collect(Collectors.toList())
-                    )
+                                .filter(airport -> airport.getIso_country().equals(country.getCode()))
+                                .collect(Collectors.toList())
+                        )
                 );
         context = countries;
     }
 
-    public List<Country> getCountries(){
+    public List<Country> getCountries() {
         return context;
     }
 

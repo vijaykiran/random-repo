@@ -1,7 +1,5 @@
 package org.lunatech.airports.resources;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.Properties;
@@ -15,7 +13,7 @@ public class Config {
     private static String countries;
     private static Properties props = new Properties();
 
-    private static void loadProperties(){
+    private static void loadProperties() {
         try {
             props.load(props.getClass().getResourceAsStream("/application.properties"));
         } catch (IOException e) {
