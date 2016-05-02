@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>The Best Airport Management System</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link th:href="@{/css/global.css}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<h1>Lunatech Airport Management Systems</h1>
+	<h2>Queries</h2>
+	<p>Search by country name or country code</p>
+	<form action="query.html">
+		<fieldset>
+			<input type="text" name="searchStr" th:value="${searchStr}" /> <input
+				type="submit" value="Search" />
+		</fieldset>
+	</form>
+	<p id="error" th:text="${errorMessage}" />
+
+	<fieldset th:if="!${#lists.isEmpty(airports)}">
+
+		<h1>Airports</h1>
+		<table>
+			<tr>
+				<th>Country</th>
+				<th>Airport</th>
+				<th>Runway</th>
+			</tr>
+			<tr th:each="airport : ${airports}">
+				<td th:text="${airport.country.name}"></td>
+				<td th:text="${airport.airport.name}"></td>
+				<td>
+					<ul th:each="runway : ${airport.runways}">
+						<li th:text="${runway.surface}"></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</fieldset>
+
+	<p>
+		<a href="home">Return home</a>
+	</p>
+
+</body>
+</html>
