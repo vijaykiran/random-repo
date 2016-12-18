@@ -25,6 +25,8 @@ class ReportController @Inject() extends Controller {
   def index = Action {
     implicit request =>
       val data1 = RunwayService.getTop10MostCommonRunwayIdentifications()
-      Ok(views.html.report(data1))
+      val data2 = RunwayService.getTypesOfRunwayPerCountry()
+      val data3 = AirportService.getTop10CountriesWithHighestAndLowestNumberOfAirports()
+      Ok(views.html.report(data1, data2, data3))
   }
 }

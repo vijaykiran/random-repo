@@ -1,6 +1,11 @@
-@(data1: Any)
+@(data1: Any, data2: Any, data3: Any)
 
 @main("Reports page") {
     <h1>Below are your reports!</h1>
+    <h3>The top 10 most common runway identifications (indicated in "le_ident" column) </h3>
     <code>@data1</code>
+    <h3>10 countries with highest number of airports (with count) and countries with lowest number of airports</h3>
+    <code>@data3</code>
+    <h3>Type of runways (as indicated in "surface" column) per country</h3>
+    <code>@data2</code>
 }
