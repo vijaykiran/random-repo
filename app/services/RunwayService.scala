@@ -29,7 +29,7 @@ object RunwayService {
       .collect()
   }
 
-  def getTypesofRunwayForAirports2(countryCode: String): Any = {
+  def getTypesofRunwayForAirports2(countryNameOrCode: String): Any = {
     import services.AirportService.airport
     //import services.CountryService.country
 
@@ -44,11 +44,10 @@ object RunwayService {
       .toDF().createOrReplaceTempView("countries")
 
     sqlContext
-      .sql("SELECT c.name, s.id, s.name, s.airport_type, r.id, r.airport_ident, r.le_ident, r.surface " +
+      .sql("SELECT s.id, s.name, s.airport_type, r.id, r.airport_ident, r.le_ident, r.surface " +
         "FROM runways r JOIN airports s ON r.airport_ref = s.id JOIN countries c ON s.iso_country = c.code " +
-        s"""WHERE c.code=\"$countryCode\" """ +
-        "ORDER BY s.id"
-      )
+        s"""WHERE c.code=\"$countryNameOrCode\" OR c.name=\"$countryNameOrCode\" """ +
+        "ORDER BY s.id")
       .collect()
   }
 }
