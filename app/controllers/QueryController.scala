@@ -26,9 +26,7 @@ class QueryController @Inject() extends Controller {
 
   def searchByCountry() = Action(parse.tolerantFormUrlEncoded) {
     implicit request =>
-      val nameOrCode = request.queryString.get("nameOrCode").flatMap(_.headOption).getOrElse("US")
-      //val airports = AirportService.getAllAirportsForCountry(nameOrCode)
-      println("invoking runways")
+      val nameOrCode = request.queryString.get("nameOrCode").flatMap(_.headOption).getOrElse("")
       val runways = RunwayService.getTypesofRunwayForAirports2(nameOrCode)
       Ok(views.html.query_results(nameOrCode, runways))
   }

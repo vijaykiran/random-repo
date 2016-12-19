@@ -31,20 +31,9 @@ object RunwayService {
 
   def getTypesofRunwayForAirports2(countryNameOrCode: String): Any = {
     import services.AirportService.airport
-    //import services.CountryService.country
-
-    val country = sqlContext.read
-      .format("com.databricks.spark.csv")
-      .option("header", "true")
-      .option("delimiter", ",")
-      .option("nullValue", "null")
-      .option("treatEmptyValuesAsNulls", "true")
-      .option("inferSchema", "true")
-      .load("resources/countries.csv")
-      .toDF().createOrReplaceTempView("countries")
-
+    import services.CountryService.country
     sqlContext
-      .sql("SELECT s.id, s.name, s.airport_type, r.id, r.airport_ident, r.le_ident, r.surface " +
+      .sql("SELECT c.name, s.id, s.name, s.type, r.id, r.airport_ident, r.le_ident, r.surface " +
         "FROM runways r JOIN airports s ON r.airport_ref = s.id JOIN countries c ON s.iso_country = c.code " +
         s"""WHERE c.code=\"$countryNameOrCode\" OR c.name=\"$countryNameOrCode\" """ +
         "ORDER BY s.id")
