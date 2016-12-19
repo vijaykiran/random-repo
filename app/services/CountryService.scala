@@ -1,9 +1,11 @@
 package services
 
 import controllers.SparkCommons._
+import com.typesafe.config.ConfigFactory
 
 object CountryService {
   import sqlContext.implicits._
+  val countryPath = ConfigFactory.load().getString("filepath.country.value")
   val country = sqlContext.read
     .format("com.databricks.spark.csv")
     .option("header", "true")
@@ -11,6 +13,6 @@ object CountryService {
     .option("nullValue", "null")
     .option("treatEmptyValuesAsNulls", "true")
     .option("inferSchema", "true")
-    .load("resources/countries.csv")
+    .load(countryPath)
     .toDF().createOrReplaceTempView("countries")
 }

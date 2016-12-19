@@ -1,4 +1,4 @@
-package controllers
+/*package controllers
 
 import org.scalatestplus.play._
 import play.api.test._
@@ -43,3 +43,4 @@ class HomeControllerSpec extends PlaySpec with OneAppPerTest {
     }
   }
 }
+*/
