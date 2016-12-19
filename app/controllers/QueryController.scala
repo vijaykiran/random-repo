@@ -3,6 +3,7 @@ package controllers
 import javax.inject._
 import play.api._
 import play.api.mvc._
+import services._
 
 /**
   * This controller creates an `Action` to handle HTTP requests to the
@@ -21,5 +22,14 @@ class QueryController @Inject() extends Controller {
   def index = Action {
     implicit request =>
     Ok(views.html.query())
+  }
+
+  def searchByCountry() = Action(parse.tolerantFormUrlEncoded) {
+    implicit request =>
+      val nameOrCode = request.queryString.get("nameOrCode").flatMap(_.headOption).getOrElse("US")
+      //val airports = AirportService.getAllAirportsForCountry(nameOrCode)
+      println("invoking runways")
+      val runways = RunwayService.getTypesofRunwayForAirports2(nameOrCode)
+      Ok(views.html.query_results(nameOrCode, runways))
   }
 }

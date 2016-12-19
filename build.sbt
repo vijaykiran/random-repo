@@ -12,6 +12,7 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1
 
 libraryDependencies += "org.apache.spark" %% "spark-core" % "2.0.2"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.0.2"
+//libraryDependencies += "com.holdenkarau" %% "spark-testing-base" % "2.0.2_0.3.3"
 libraryDependencies += "org.apache.hadoop" %  "hadoop-client"   % "2.7.0"
 libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.7.2"
 libraryDependencies += "com.databricks" %% "spark-csv" % "1.5.0"

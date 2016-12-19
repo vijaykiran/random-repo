@@ -1,6 +1,7 @@
 package services
 
 import controllers.SparkCommons._
+import org.apache.spark.sql.Row
 
 object AirportService {
   import sqlContext.implicits._
@@ -14,7 +15,7 @@ object AirportService {
     .load("resources/airports.csv")
     .toDF().createOrReplaceTempView("airports")
 
-  def getTop10CountriesWithHighestAndLowestNumberOfAirports(): Any ={
+  def getTop10CountriesWithHighestAndLowestNumberOfAirports(): Any = {
     import services.CountryService.country
     sqlContext
       .sql("SELECT * FROM " +

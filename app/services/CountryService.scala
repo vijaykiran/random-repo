@@ -13,5 +13,4 @@ object CountryService {
     .option("inferSchema", "true")
     .load("resources/countries.csv")
     .toDF().createOrReplaceTempView("countries")
-
 }
