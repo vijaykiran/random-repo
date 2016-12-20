@@ -1,31 +1,10 @@
 package services
+
 import org.scalatest._
-import org.apache.spark.sql.SQLContext
-import org.apache.spark.{SparkContext, SparkConf}
-import com.holdenkarau.spark.testing.SharedSparkContext
 import org.apache.spark.sql.Row
 import java.io.FileNotFoundException
 
 class RunwayServiceSpec extends FunSuite with BeforeAndAfter {
-/*
-  private val master = "local[2]"
-  private val appName = "example-spark"
-
-  private var sc: SparkContext = _
-
-  before {
-    val conf = new SparkConf()
-      .setMaster(master)
-      .setAppName(appName)
-
-    sc = new SparkContext(conf)
-  }
-
-  after {
-    if (sc != null) {
-      sc.stop()
-    }
-  }*/
 
   test("Get Top 10 Most Common Runway Identifications test"){
     val expected = Array(Row("H1",9), Row("15",5), Row("N",4), Row("08",3), Row("18",3), Row("05",1), Row("06",1), Row("09",1), Row("11",1), Row("14",1))
@@ -48,6 +27,15 @@ class RunwayServiceSpec extends FunSuite with BeforeAndAfter {
       Row("Caribbean Netherlands",6523,"Total Rf Heliport","heliport",255155,"00AK","N","GRVL"),
       Row("Caribbean Netherlands",6525,"Epps Airpark","small_airport",254165,"00AL","N","TURF"))
     val actual = RunwayService.getAirportAndRunwaysForCountry("Caribbean Netherlands")
+    assert(actual === expected)
+  }
+
+  test("getAirportAndRunwaysForCountry when partial country name is passed as parameter") {
+    val expected =  Array(
+      Row("Caribbean Netherlands",6523,"Total Rf Heliport","heliport",269408,"00A","H1","ASPH-G"),
+      Row("Caribbean Netherlands",6523,"Total Rf Heliport","heliport",255155,"00AK","N","GRVL"),
+      Row("Caribbean Netherlands",6525,"Epps Airpark","small_airport",254165,"00AL","N","TURF"))
+    val actual = RunwayService.getAirportAndRunwaysForCountry("Caribbean")
     assert(actual === expected)
   }
 
