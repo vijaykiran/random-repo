@@ -11,4 +11,8 @@ Implemented Functionality:
 To Do:
 - Unit tests for controllers
 - Performace test for spark
-- Pretty-fy the views
+- Integrate Bootstrap for the views
+- Load each report on click, and not all at the same time
+- add pagination to results
+- add logging
+- resolve winutils.exe issue

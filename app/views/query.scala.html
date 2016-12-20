@@ -1,10 +1,12 @@
 @()
 
 @main("Query Data") {
+<div class="intro-report-query">
 <h1>Query your data!</h1>
 <form method="GET" action="@routes.QueryController.searchByCountry()" >
     <h4>Enter the country name or code</h4>
     <input type="text" name="nameOrCode"/>
     <input type="submit" value="Submit Form">
 </form>
+</div>
 }

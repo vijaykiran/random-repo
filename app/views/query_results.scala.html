@@ -1,10 +1,37 @@
-@(country: Any, runways: Any)
+@(country: String, runways: Array[org.apache.spark.sql.Row])
 
 @main("Query Results") {
-<h1>Query your data!</h1>
-<form method = "post">
+<div class="intro-report-query">
     <h4>Below are your results</h4>
-    <code>@country</code>
-    <code>@runways</code>
-</form>
+
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th>Country Name</th>
+                <th>Airport ID</th>
+                <th>Airport Name</th>
+                <th>Airport Type</th>
+                <th>Runway ID</th>
+                <th>Airport Ident</th>
+                <th>Le Ident</th>
+                <th>Surface</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for(item <- runways) {
+            <tr>
+                <td>@item.getString(0)</td>
+                <td>@item.getInt(1)</td>
+                <td>@item.getString(2)</td>
+                <td>@item.getString(3)</td>
+                <td>@item.getInt(4)</td>
+                <td>@item.getString(5)</td>
+                <td>@item.getString(6)</td>
+                <td>@item.getString(7)</td>
+            </tr>
+            }
+            </tbody>
+        </table>
+</div>
 }
