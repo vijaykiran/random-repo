@@ -13,9 +13,9 @@ parallelExecution in Test := false
 //javaOptions ++= Seq("-Xms512M", "-Xmx2048M", "-XX:MaxPermSize=2048M", "-XX:+CMSClassUnloadingEnabled")
 
 libraryDependencies += filters
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.0" % Test
 
-libraryDependencies += "org.scalatest" % "scalatest_2.11" % "3.0.1" % "test"
+//libraryDependencies += "org.scalatest" % "scalatest_2.11" % "2.2.1" % "test"
 libraryDependencies += "org.apache.spark" %% "spark-core" % "2.0.2"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.0.2"
 libraryDependencies += "com.holdenkarau" %% "spark-testing-base" % "1.6.1_0.3.3"

@@ -61,7 +61,7 @@ class RunwayServiceSpec extends FunSuite with BeforeAndAfter {
   }
 
   test("getAirportAndRunwaysForCountry when passing an empty string") {
-    assertThrows[IllegalArgumentException] {
+    intercept[IllegalArgumentException] {
       RunwayService.getAirportAndRunwaysForCountry("")
     }
   }

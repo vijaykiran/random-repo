@@ -1,6 +1,7 @@
-/*package controllers
+package controllers
 
-import org.scalatestplus.play._
+import org.scalatest._
+import org.scalatestplus.play.OneAppPerTest
 import play.api.test._
 import play.api.test.Helpers._
 
@@ -10,37 +11,36 @@ import play.api.test.Helpers._
  *
  * For more information, see https://www.playframework.com/documentation/latest/ScalaTestingWithScalaTest
  */
-class HomeControllerSpec extends PlaySpec with OneAppPerTest {
+class HomeControllerSpec extends FunSuite with OneAppPerTest {
+   override def withFixture(test: NoArgTest): Outcome ={
+     super.withFixture(test)
+   }
 
-  "HomeController GET" should {
-
-    "render the index page from a new instance of controller" in {
+   test("HomeController GET should render the index page from a new instance of controller") {
       val controller = new HomeController
       val home = controller.index().apply(FakeRequest())
 
-      status(home) mustBe OK
-      contentType(home) mustBe Some("text/html")
-      contentAsString(home) must include ("Welcome to Play")
+      assert(status(home) === OK)
+      assert(contentType(home) === Some("text/html"))
+      assert((contentAsString(home) contains("Welcome to Play")) === true)
     }
 
-    "render the index page from the application" in {
+    test("HomeController GET should render the index page from the application") {
       val controller = app.injector.instanceOf[HomeController]
       val home = controller.index().apply(FakeRequest())
 
-      status(home) mustBe OK
-      contentType(home) mustBe Some("text/html")
-      contentAsString(home) must include ("Welcome to Play")
+      assert(status(home) === OK)
+      assert(contentType(home) === Some("text/html"))
+      assert((contentAsString(home) contains ("Welcome to Play")) === true)
     }
 
-    "render the index page from the router" in {
+    test("HomeController GET should render the index page from the router") {
       // Need to specify Host header to get through AllowedHostsFilter
       val request = FakeRequest(GET, "/").withHeaders("Host" -> "localhost")
       val home = route(app, request).get
 
-      status(home) mustBe OK
-      contentType(home) mustBe Some("text/html")
-      contentAsString(home) must include ("Welcome to Play")
+      assert(status(home) === OK)
+      assert(contentType(home) === Some("text/html"))
+      assert((contentAsString(home) contains ("Welcome to Play") ) === true)
     }
-  }
 }
-*/
