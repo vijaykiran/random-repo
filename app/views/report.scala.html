@@ -1,7 +1,7 @@
 @(data1: Array[org.apache.spark.sql.Row], data2: Array[org.apache.spark.sql.Row], data3: Array[org.apache.spark.sql.Row])
 
 @main("Reports page") {
-<div class="intro-report-query">
+<div class="intro-report">
     <h5>The top 10 most common runway identifications (indicated in "le_ident" column) </h5>
 <div class="table-responsive">
 <table class="table table-sm">
@@ -62,7 +62,7 @@
 </div>
 <script>
 $(document).ready(function() {
-$('#runway').DataTable();
+    $('#runway').dataTable();
 } );
 </script>
 }
