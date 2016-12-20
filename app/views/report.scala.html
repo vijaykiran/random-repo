@@ -1,0 +1,68 @@
+@(data1: Array[org.apache.spark.sql.Row], data2: Array[org.apache.spark.sql.Row], data3: Array[org.apache.spark.sql.Row])
+
+@main("Reports page") {
+<div class="intro-report">
+    <h5>The top 10 most common runway identifications (indicated in "le_ident" column) </h5>
+<div class="table-responsive">
+<table class="table table-sm">
+    <thead>
+    <tr>
+        <th>Le ident</th>
+        <th>Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for(item <- data1) {
+    <tr>
+        <td>@item.getString(0)</td>
+        <td>@item.getLong(1)</td>
+    </tr>
+    }
+    </tbody>
+</table>
+</div>
+    <h5>10 countries with highest number of airports (with count) and countries with lowest number of airports</h5>
+<div class="table-responsive">
+<table class="table table-sm">
+    <thead>
+    <tr>
+        <th>Country</th>
+        <th>Number of Airports</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for(item <- data3) {
+    <tr>
+        <td>@item.getString(0)</td>
+        <td>@item.getLong(1)</td>
+    </tr>
+    }
+    </tbody>
+</table>
+</div>
+    <h5>Type of runways (as indicated in "surface" column) per country</h5>
+<div class="table-responsive">
+<table id="runway" class="table table-sm">
+    <thead>
+    <tr>
+        <th>Type of runway</th>
+        <th>Country</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for(item <- data2) {
+    <tr>
+        <td>@item.getString(0)</td>
+        <td>@item.getString(1)</td>
+    </tr>
+    }
+    </tbody>
+</table>
+</div>
+</div>
+<script>
+$(document).ready(function() {
+    $('#runway').dataTable();
+} );
+</script>
+}
